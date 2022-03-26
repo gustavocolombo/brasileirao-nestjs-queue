@@ -5,6 +5,7 @@ import { PrismaService } from 'src/shared/prisma/prisma.service';
 import { ConfigModule } from '@nestjs/config';
 import { BullModule } from '@nestjs/bull';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { AuthenticateUser } from './services/authenticate-user';
 import SendMailProducerService from 'src/jobs/sendMail-producer.service';
 import SendEmailConsumer from 'src/jobs/sendMail-consumer';
 
@@ -36,6 +37,7 @@ import SendEmailConsumer from 'src/jobs/sendMail-consumer';
     PrismaService,
     SendMailProducerService,
     SendEmailConsumer,
+    AuthenticateUser,
   ],
   controllers: [UserController],
 })
