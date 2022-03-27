@@ -8,10 +8,16 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { AuthenticateUser } from './services/authenticate-user';
 import SendMailProducerService from 'src/jobs/sendMail-producer.service';
 import SendEmailConsumer from 'src/jobs/sendMail-consumer';
+import { ResetPassword } from './services/reset-password';
+import { TwilioModule } from 'nestjs-twilio';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    TwilioModule.forRoot({
+      accountSid: process.env.TWILIO_ACCOUNT_SID,
+      authToken: process.env.TWILIO_AUTH_TOKEN,
+    }),
     BullModule.forRoot({
       redis: {
         host: 'localhost',
@@ -38,6 +44,7 @@ import SendEmailConsumer from 'src/jobs/sendMail-consumer';
     SendMailProducerService,
     SendEmailConsumer,
     AuthenticateUser,
+    ResetPassword,
   ],
   controllers: [UserController],
 })
